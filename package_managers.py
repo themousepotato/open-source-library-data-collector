@@ -41,6 +41,8 @@ class PackageManagers(object):
         num_csharp_http_client_downloads = None
         num_php_http_client_downloads = None
         num_node_http_client_downloads = None
+
+        check_dict = {}
         for url in package_manager_urls:
             if 'https://www.nuget.org/packages/SendGrid' == url:
                 num_total_csharp_downloads = self.csharp_downloads(url)
@@ -57,17 +59,22 @@ class PackageManagers(object):
             if 'https://packagist.org/packages/sendgrid/php-http-client' == \
                     url:
                 num_php_http_client_downloads = self.php_downloads(url)
-            if 'pypi' in url and 'sendgrid' in url:
-                num_python_downloads = self.python_downloads(url)
-            if 'pypi' in url and 'python_http_client' in url:
-                num_python_http_client_downloads = self.python_downloads(url)
-            if 'pypi' in url and 'open_source_library_data_collector' in url:
-                num_python_open_source_library_data_collector_downloads = \
-                    self.python_downloads(url)
-            if 'rubygems' in url and 'sendgrid' in url:
-                num_ruby_downloads = self.ruby_downloads(url)
-            if 'rubygems' in url and 'http' in url:
-                num_ruby_http_client_downloads = self.ruby_downloads(url)
+            if 'pypi' in url:
+                if 'sendgrid' in url:
+                    num_python_downloads = self.python_downloads(url)
+            if 'pypi' in url:
+                if 'python_http_client' in url:
+                    num_python_http_client_downloads = self.python_downloads(url)
+            if 'pypi' in url:
+                if 'open_source_library_data_collector' in url:
+                    num_python_open_source_library_data_collector_downloads = \
+                        self.python_downloads(url)
+            if 'rubygems' in url:
+                if 'sendgrid' in url:
+                    num_ruby_downloads = self.ruby_downloads(url)
+            if 'rubygems' in url:
+                if 'http' in url:
+                    num_ruby_http_client_downloads = self.ruby_downloads(url)
 
         return self.update_db(
             num_total_csharp_downloads,
